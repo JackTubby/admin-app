@@ -120,6 +120,79 @@ export const tokens = (mode) => ({
                 800: "#c3c6fd",
                 900: "#e1e2fe",
             },
-        }
-    )
-})
+        }),
+});
+
+// Colours are setup above so now we setup material UI to use those colours
+
+// Mui theme settings
+export const themeSettings = (mode) => {
+    // return whatever colours (tokens) depending on the mode
+    const colours = tokens(mode);
+
+    return {
+        palette: {
+            mode: mode,
+            ...(mode === 'dark'
+                ? {
+                   primary: {
+                    main: colours.primary[500],
+                   },
+                   secondary: {
+                    main:colours.greenAccent[500],
+                    },
+                    neutral: {
+                        dark: colours.grey[700],
+                        main: colours.grey[500],
+                        light: colours.grey[100],
+                    },
+                    background: {
+                        default: colours.primary[500],
+                    }
+                } : {
+                    primary: {
+                        main: colours.primary[100],
+                       },
+                       secondary: {
+                        main:colours.greenAccent[500],
+                        },
+                        neutral: {
+                            dark: colours.grey[700],
+                            main: colours.grey[500],
+                            light: colours.grey[100],
+                        },
+                        background: {
+                            default: "#fcfcfc",
+                        }
+                })
+        },
+        typography: {
+            fontFamily: ["Source Sans Pro", "sans-serif"].join(","),
+            fontSize: 12,
+            h1: {
+                fontFamily: ["Source Sans Pro", "sans-serif"].join(","),
+                fontSize: 40,
+            },
+            h2: {
+                fontFamily: ["Source Sans Pro", "sans-serif"].join(","),
+                fontSize: 32,
+            },
+            h3: {
+                fontFamily: ["Source Sans Pro", "sans-serif"].join(","),
+                fontSize: 24,
+            },
+            h4: {
+                fontFamily: ["Source Sans Pro", "sans-serif"].join(","),
+                fontSize: 20,
+            },
+            h5: {
+                fontFamily: ["Source Sans Pro", "sans-serif"].join(","),
+                fontSize: 16,
+            },
+            h6: {
+                fontFamily: ["Source Sans Pro", "sans-serif"].join(","),
+                fontSize: 14,
+            },
+        },
+    };
+};
