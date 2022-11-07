@@ -1,4 +1,4 @@
-// Setup to get all the colours and teh typography of the site. (Light & Dark Mode)
+// Setup to get all the colours and the typography of the site. (Light & Dark Mode)
 
 import { createContext, useState, useMemo } from "react";
 import { createTheme } from "@mui/material/styles";
@@ -196,3 +196,31 @@ export const themeSettings = (mode) => {
         },
     };
 };
+
+// Context for colour mode
+// This is a func that will allow us to provide it throughout the app so we have a trigger for this
+export const ColourModeContext = createContext({
+    toggleColourMode: () => {}
+});
+
+export const useMode = () => {
+    const [mode, setMode] = useState("dark");
+
+    const colourMode = useMemo(
+        () => ({
+          toggleColourMode: () =>
+            setMode((prev) => (prev === "light" ? "dark" : "light")),
+        }),
+        []
+      );
+    // Create the theme for material UI and we are passing in the mode into our theme settings we created
+    // Which gives us an obj of the proper format depending on the light or dark mode
+    const theme = useMemo(() => createTheme(themeSettings(mode)), [mode])
+
+    // Reaturn theme and colourMode for us to use
+    return [theme, colourMode]
+}
+
+// ?
+// By doing all this it allows us to create a context that we can have easy access to the condition of wether its dark or light and allow
+// us to use a function to change modes, this function will then be applied to our light and dark mode icon on our page
